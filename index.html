@@ -3,147 +3,407 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domandina per te Habibty❤️</title>
+    <title>Invito Speciale Stasera 🍣❤️</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
+        * { box-sizing: border-box; touch-action: manipulation; }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            background-color: #ffe4e1;
-            overflow: hidden;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             text-align: center;
+            padding: 15px;
+            user-select: none;
         }
 
         .container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            width: 85%;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 2.2rem 1.5rem;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            width: 100%;
             max-width: 450px;
             position: relative;
-            z-index: 10;
+            animation: fadeIn 0.4s ease-in-out;
         }
 
-        h1 { color: #d63384; margin-bottom: 2rem; font-size: 1.6rem; line-height: 1.4; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
+        h1 { color: #d63384; font-size: 1.5rem; margin-bottom: 0.5rem; }
+        p { color: #555; font-size: 0.95rem; line-height: 1.4; }
+
+        .hidden { display: none; }
+
+        /* BOTTONI PRIMA SCHERMATA */
         .btn-group {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-            min-height: 60px;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
         }
 
-        button {
-            padding: 12px 25px;
+        #btn-si { background-color: #28a745; color: white; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3); }
+        #btn-no { background-color: #dc3545; color: white; box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3); }
+        .scappa { position: fixed !important; z-index: 1000; }
+
+        .level-badge {
+            background: #ffe4e1;
+            color: #d63384;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .ingredient {
+            background: #fff;
+            border: 2px solid #ffb6c1;
+            border-radius: 14px;
+            padding: 12px;
+            cursor: grab;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .ingredient .icon { font-size: 1.6rem; }
+        .ingredient .name { font-size: 0.9rem; font-weight: bold; color: #333; }
+
+        .ingredient:active { cursor: grabbing; transform: scale(1.03); }
+
+        /* PIATTO TARGET */
+        .drop-zone {
+            background: #fff0f5;
+            border: 3px dashed #d63384;
+            border-radius: 20px;
+            padding: 15px;
+            min-height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .drop-zone.drag-over { background-color: #ffe4e1; border-style: solid; }
+        .plate-placeholder { color: #aaa; font-style: italic; font-size: 0.85rem; }
+
+        .feedback-msg {
+            height: 28px;
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        /* ORARIO & SCHERMATA FINALE */
+        select {
+            width: 100%;
+            padding: 12px 15px;
             font-size: 1.1rem;
+            border-radius: 12px;
+            border: 2px solid #d63384;
+            background: white;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 15px 0 20px 0;
+        }
+
+        button, .btn-link {
+            padding: 14px 24px;
+            font-size: 1.05rem;
             font-weight: bold;
             border: none;
-            border-radius: 50px;
+            border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.1s;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .btn-green { background-color: #4caf50; color: white; }
-        .btn-red { background-color: #f44336; color: white; }
-        .btn-next { background-color: #d63384; color: white; margin-top: 10px; }
-
-        .scappa {
-            position: fixed;
-            z-index: 9999;
-            transition: all 0.1s ease;
+        .pass-card {
+            border: 2px dashed #d63384;
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 15px;
         }
 
-        .hidden { display: none; }
+        .badge {
+            background: #d63384;
+            color: white;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
+    <!-- SCHERMATA 1: Domanda Trabocchetto -->
     <div id="schermata1" class="container">
-        <h1>Stasera Kebab? 🥙</h1>
+        <h1>Programmi per stasera? 🤔</h1>
+        <p>Stasera si va a sushi, ma prima dimostra di essere una vera SUSHIGIRL!</p>
         <div class="btn-group">
-            <button id="btn-si-1" class="btn-green">SÌ</button>
-            <button id="btn-no-1" class="btn-red">NO</button>
+            <button id="btn-si">Accetta la Sfida 🍣</button>
+            <button id="btn-no">Non ho voglia 😜</button>
         </div>
     </div>
 
-    <div id="schermata-msg" class="container hidden">
-        <h1>Come No?! Se mi avevi detto che ti andava... 🙂</h1>
-        <button id="btn-vai-oltre" class="btn-next">Vabbè dai... 🙄</button>
+    <!-- SCHERMATA 2: IL GIOCO EXPERT -->
+    <div id="schermata2" class="container hidden">
+        <span id="level-badge" class="level-badge">Livello 1 di 3</span>
+        <h1 id="game-title">Nigiri Sake Aburi 🍣🔥</h1>
+        <p id="game-desc">Seleziona solo gli ingredienti corretti per questa preparazione!</p>
+
+        <!-- GRIGLIA INGREDIENTI -->
+        <div id="ingredients-grid" class="ingredients-grid"></div>
+
+        <!-- PIATTO TARGET -->
+        <div id="plate" class="drop-zone">
+            <span id="placeholder-text" class="plate-placeholder">Componi la ricetta da vera Chef... 🥢</span>
+        </div>
+
+        <div id="feedback" class="feedback-msg"></div>
     </div>
 
-    <div id="schermata2" class="container hidden">
-        <h1>Allora sabato andiamo alla Pasticceria Adriatica? 🥐</h1>
-        <div class="btn-group">
-            <button id="btn-si-2" class="btn-green">SÌ</button>
-            <button id="btn-no-2" class="btn-red">NO</button>
+    <!-- SCHERMATA 3: SELEZIONE ORARIO -->
+    <div id="schermata3" class="container hidden">
+        <span class="badge">SUSHIGIRL Professionista! 🏆</span>
+        <h1>Test Superato Habibty!</h1>
+        <p>Hai dimostrato di essere un'esperta inarrivabile. Ora scegli l'orario per stasera:</p>
+
+        <label for="select-ora" style="font-weight: bold; color: #d63384; display: block; margin-top: 15px;">
+            A che ora ci andiamo? 🕗
+        </label>
+        <select id="select-ora">
+            <option value="19:30">19:30</option>
+            <option value="20:00">20:00</option>
+            <option value="20:30" selected>20:30</option>
+            <option value="21:00">21:00</option>
+            <option value="21:30">21:30</option>
+        </select>
+
+        <button id="btn-conferma-ora" style="background-color: #d63384; color: white; width: 100%;">
+            Conferma Orario & Prenota! 🎉
+        </button>
+    </div>
+
+    <!-- SCHERMATA 4: BIGLIETTO FINALE WHATSAPP -->
+    <div id="schermata4" class="container hidden">
+        <span class="badge">Prenotazione Confermata</span>
+        <h1>Ci vediamo stasera Amore! 🎉❤️</h1>
+        
+        <div class="pass-card">
+            <p><strong>Evento:</strong> Abbuffata di Sushi 🍣</p>
+            <p><strong>Orario scelto:</strong> Stasera ore <span id="ora-confermata" style="color: #d63384; font-weight: bold;">20:30</span> 🕗</p>
+            <p><strong>Conto:</strong> Offro io! 💳😊</p>
+            <p><strong>Codice Sconto:</strong> TI-AMO-100!❤️ </p>
+        </div>
+
+        <div style="margin-top: 25px;">
+            <a id="whatsapp-link" href="#" class="btn-link" style="background-color: #25D366; color: white; width: 100%;">
+                Invia conferma su WhatsApp 📲
+            </a>
         </div>
     </div>
 
     <script>
-        // Funzione per far scappare il bottone
+        // Bottone che scappa
+        const btnSi1 = document.getElementById('btn-si');
+        const btnNo1 = document.getElementById('btn-no');
+        const schermata1 = document.getElementById('schermata1');
+        const schermata2 = document.getElementById('schermata2');
+
+        let clickNoCount = 0;
+        const frasiNo = ["Non ho voglia 😜", "Sicura?? 🥺", "Guarda che c'è il sushi!! 🍣", "Daiiii ❤️", "Tasto rotto! 😂"];
+
         function scappa(bottone) {
             bottone.classList.add('scappa');
-            const padding = 60;
-            const maxX = window.innerWidth - bottone.offsetWidth - padding;
-            const maxY = window.innerHeight - bottone.offsetHeight - padding;
+            clickNoCount = (clickNoCount + 1) % frasiNo.length;
+            bottone.innerText = frasiNo[clickNoCount];
 
-            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+            const currentSize = parseFloat(window.getComputedStyle(btnSi1).fontSize);
+            btnSi1.style.fontSize = (currentSize + 2) + 'px';
 
-            bottone.style.left = randomX + 'px';
-            bottone.style.top = randomY + 'px';
+            const x = Math.random() * (window.innerWidth - bottone.offsetWidth - 20);
+            const y = Math.random() * (window.innerHeight - bottone.offsetHeight - 20);
+            bottone.style.left = Math.max(10, x) + 'px';
+            bottone.style.top = Math.max(10, y) + 'px';
         }
 
-        // --- SCHERMATA 1 ---
-        const bSi1 = document.getElementById('btn-si-1');
-        const bNo1 = document.getElementById('btn-no-1');
-        
-        // Qui il SÌ scappa
-        bSi1.addEventListener('mouseover', () => scappa(bSi1));
-        bSi1.addEventListener('touchstart', (e) => { e.preventDefault(); scappa(bSi1); });
+        btnNo1.addEventListener('mouseover', () => scappa(btnNo1));
+        btnNo1.addEventListener('touchstart', (e) => { e.preventDefault(); scappa(btnNo1); });
 
-        // Clicca NO -> Messaggio intermedio
-        bNo1.addEventListener('click', () => {
-            document.getElementById('schermata1').classList.add('hidden');
-            document.getElementById('schermata-msg').classList.remove('hidden');
-            // Resettiamo il bottone scappato per la prossima fase se necessario
-            bSi1.classList.remove('scappa');
-            bSi1.style.position = "static";
+        btnSi1.addEventListener('click', () => {
+            schermata1.classList.add('hidden');
+            schermata2.classList.remove('hidden');
+            caricaLivello(0);
         });
 
-        // --- PASSAGGIO ALLA PASTICCERIA ---
-        document.getElementById('btn-vai-oltre').addEventListener('click', () => {
-            document.getElementById('schermata-msg').classList.add('hidden');
-            document.getElementById('schermata2').classList.remove('hidden');
-        });
+        // DATI LIVELLI SUSHI EXPERT (SENZA SUB)
+        const livelli = [
+            {
+                titolo: "Nigiri Sake 🍣🔥",
+                desc: "Componi un <strong>Nigiri Sake</strong> a regola d'arte:",
+                richiesti: ["shari", "sake", "teriyaki"],
+                ingredienti: [
+                    { id: "shari", icon: "🍚", name: "Shari" },
+                    { id: "sake", icon: "🐟", name: "Sake" },
+                    { id: "teriyaki", icon: "🍯", name: "Teriyaki" },
+                    { id: "rice_plain", icon: "🍚", name: "Riso Bianco" },
+                    { id: "mayo", icon: "🧴", name: "Maionese" }
+                ],
+                errori: {
+                    rice_plain: "❌ Errore! Un vero chef usa lo Shari, non il riso in bianco!",
+                    mayo: "❌ Ehi! Niente maionese da supermercato sui Nigiri"
+                }
+            },
+            {
+                titolo: "Ebi Uramaki 🍤🥑",
+                desc: "Seleziona gli elementi per un <strong>Uramaki</strong> perfetto:",
+                richiesti: ["shari", "nori", "ebi_tempura", "tobiko"],
+                ingredienti: [
+                    { id: "shari", icon: "🍚", name: "Shari" },
+                    { id: "nori", icon: "🍙", name: "Alga Nori" },
+                    { id: "ebi_tempura", icon: "🍤", name: "Ebi Tempura" },
+                    { id: "tobiko", icon: "🟧", name: "Tobiko" },
+                    { id: "surimi", icon: "🦀", name: "Surimi" }
+                ],
+                errori: {
+                    surimi: "❌ Da te mi aspetto di meglio!"
+                }
+            }        ];
 
-        // --- SCHERMATA 2 ---
-        const bNo2 = document.getElementById('btn-no-2');
-        const bSi2 = document.getElementById('btn-si-2');
+        let livelloAttuale = 0;
+        let inseriti = [];
 
-        // Qui il NO scappa
-        bNo2.addEventListener('mouseover', () => scappa(bNo2));
-        bNo2.addEventListener('touchstart', (e) => { e.preventDefault(); scappa(bNo2); });
-
-        bSi2.addEventListener('click', () => {
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#ff69b4', '#ff1493', '#ffffff']
-            });
+        function caricaLivello(index) {
+            livelloAttuale = index;
+            inseriti = [];
             
-            bSi2.innerHTML = "EVVIVA! 😍";
-            setTimeout(() => {
-                alert("Sapevo che avresti detto di sì!😂😂 Sabato colazione top! ❤️🥐");
-            }, 600);
+            const dati = livelli[index];
+            document.getElementById('level-badge').innerText = `Livello ${index + 1} di 3`;
+            document.getElementById('game-title').innerText = dati.titolo;
+            document.getElementById('game-desc').innerHTML = dati.desc;
+            document.getElementById('feedback').innerText = "";
+
+            const plate = document.getElementById('plate');
+            plate.innerHTML = `<span id="placeholder-text" class="plate-placeholder">Componi la ricetta... 🥢</span>`;
+
+            const grid = document.getElementById('ingredients-grid');
+            grid.innerHTML = "";
+            dati.ingredienti.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'ingredient';
+                el.draggable = true;
+                el.dataset.type = item.id;
+                el.id = `ing-${item.id}`;
+                el.innerHTML = `
+                    <div class="icon">${item.icon}</div>
+                    <span class="name">${item.name}</span>
+                `;
+
+                el.addEventListener('dragstart', (e) => e.dataTransfer.setData('text/plain', item.id));
+                el.addEventListener('click', () => gestisciIngrediente(item.id));
+                
+                grid.appendChild(el);
+            });
+        }
+
+        const plate = document.getElementById('plate');
+        plate.addEventListener('dragover', (e) => { e.preventDefault(); plate.classList.add('drag-over'); });
+        plate.addEventListener('dragleave', () => plate.classList.remove('drag-over'));
+        plate.addEventListener('drop', (e) => {
+            e.preventDefault();
+            plate.classList.remove('drag-over');
+            const type = e.dataTransfer.getData('text/plain');
+            gestisciIngrediente(type);
+        });
+
+        function gestisciIngrediente(type) {
+            const dati = livelli[livelloAttuale];
+            const feedback = document.getElementById('feedback');
+
+            if (!dati.richiesti.includes(type)) {
+                feedback.innerText = dati.errori[type] || "❌ Errore! Ingredienti non idonei per un sushi di alto livello!";
+                return;
+            }
+
+            if (inseriti.includes(type)) return;
+
+            feedback.innerText = "";
+            const placeholder = document.getElementById('placeholder-text');
+            if (placeholder) placeholder.style.display = 'none';
+
+            inseriti.push(type);
+            const ingData = dati.ingredienti.find(i => i.id === type);
+            
+            const itemSpan = document.createElement('span');
+            itemSpan.style.fontSize = '1.8rem';
+            itemSpan.title = ingData.name;
+            itemSpan.innerText = ingData.icon;
+            plate.appendChild(itemSpan);
+
+            const el = document.getElementById(`ing-${type}`);
+            if (el) {
+                el.style.opacity = '0.3';
+                el.style.pointerEvents = 'none';
+            }
+
+            if (inseriti.length === dati.richiesti.length) {
+                setTimeout(() => {
+                    if (livelloAttuale + 1 < livelli.length) {
+                        caricaLivello(livelloAttuale + 1);
+                    } else {
+                        document.getElementById('schermata2').classList.add('hidden');
+                        document.getElementById('schermata3').classList.remove('hidden');
+                    }
+                }, 600);
+            }
+        }
+
+        // SCHERMATA FINALE & WHATSAPP
+        document.getElementById('btn-conferma-ora').addEventListener('click', () => {
+            const oraSelezionata = document.getElementById('select-ora').value;
+            document.getElementById('ora-confermata').innerText = oraSelezionata;
+
+            document.getElementById('schermata3').classList.add('hidden');
+            document.getElementById('schermata4').classList.remove('hidden');
+
+            confetti({ particleCount: 130, spread: 80, origin: { y: 0.6 } });
+
+            // SOSTITUISCI CON IL TUO NUMERO VERO (es. 393331234567)
+            const tuoNumero = "3914755362"; 
+            const messaggio = encodeURIComponent(`Ho superato il test da vera SUSHIGIRL! 🍣🏆 Ci vediamo stasera HABIBI alle ore ${oraSelezionata}! ❤️`);
+            document.getElementById('whatsapp-link').href = `https://wa.me/${tuoNumero}?text=${messaggio}`;
         });
     </script>
 </body>
