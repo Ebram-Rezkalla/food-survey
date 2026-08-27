@@ -1,410 +1,377 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invito Speciale Stasera 🍣❤️</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <style>
-        * { box-sizing: border-box; touch-action: manipulation; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Montaldi Gioielli | Signs of Abruzzo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --color-silver: #EDEDED;
+      --color-purple: #8471AB;
+      --color-gold: #DBB339;
+      --color-forest: #1A3E35;
+      --color-dark: #222521;
+      --color-white: #FFFFFF;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Montserrat', sans-serif;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            text-align: center;
-            padding: 15px;
-            user-select: none;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .container {
-            background: rgba(255, 255, 255, 0.96);
-            padding: 2.2rem 1.5rem;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            width: 100%;
-            max-width: 450px;
-            position: relative;
-            animation: fadeIn 0.4s ease-in-out;
-        }
+    body {
+      background-color: var(--color-silver);
+      color: var(--color-dark);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    /* HEADER & NAVIGATION */
+    header {
+      background-color: var(--color-forest);
+      padding: 1.2rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
 
-        h1 { color: #d63384; font-size: 1.5rem; margin-bottom: 0.5rem; }
-        p { color: #555; font-size: 0.95rem; line-height: 1.4; }
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .hidden { display: none; }
+    .brand-logo {
+      text-align: center;
+      text-decoration: none;
+    }
 
-        /* BOTTONI PRIMA SCHERMATA */
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
+    .brand-logo h1 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--color-gold);
+      letter-spacing: 2px;
+      font-weight: 400;
+    }
 
-        #btn-si { background-color: #28a745; color: white; box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3); }
-        #btn-no { background-color: #dc3545; color: white; box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3); }
-        .scappa { position: fixed !important; z-index: 1000; }
+    .brand-logo span {
+      display: block;
+      font-size: 0.65rem;
+      color: var(--color-silver);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-top: -3px;
+    }
 
-        .level-badge {
-            background: #ffe4e1;
-            color: #d63384;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
 
-        .ingredients-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 15px 0;
-        }
+    .nav-links a {
+      color: var(--color-silver);
+      text-decoration: none;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: color 0.3s ease;
+    }
 
-        .ingredient {
-            background: #fff;
-            border: 2px solid #ffb6c1;
-            border-radius: 14px;
-            padding: 12px;
-            cursor: grab;
-            transition: transform 0.2s, border-color 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
+    .nav-links a:hover {
+      color: var(--color-gold);
+    }
 
-        .ingredient .icon { font-size: 1.6rem; }
-        .ingredient .name { font-size: 0.9rem; font-weight: bold; color: #333; }
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(180deg, var(--color-forest) 0%, var(--color-dark) 100%);
+      color: var(--color-silver);
+      padding: 6rem 2rem;
+      text-align: center;
+      border-bottom: 3px solid var(--color-gold);
+    }
 
-        .ingredient:active { cursor: grabbing; transform: scale(1.03); }
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-        /* PIATTO TARGET */
-        .drop-zone {
-            background: #fff0f5;
-            border: 3px dashed #d63384;
-            border-radius: 20px;
-            padding: 15px;
-            min-height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-            transition: background-color 0.3s;
-        }
+    .hero h2 {
+      font-family: var(--font-serif);
+      font-size: 3.2rem;
+      color: var(--color-gold);
+      font-weight: 400;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
 
-        .drop-zone.drag-over { background-color: #ffe4e1; border-style: solid; }
-        .plate-placeholder { color: #aaa; font-style: italic; font-size: 0.85rem; }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--color-silver);
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
 
-        .feedback-msg {
-            height: 28px;
-            color: #dc3545;
-            font-weight: bold;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
+    .btn-gold {
+      display: inline-block;
+      background-color: var(--color-gold);
+      color: var(--color-dark);
+      padding: 0.8rem 2rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
 
-        /* ORARIO & SCHERMATA FINALE */
-        select {
-            width: 100%;
-            padding: 12px 15px;
-            font-size: 1.1rem;
-            border-radius: 12px;
-            border: 2px solid #d63384;
-            background: white;
-            color: #333;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 15px 0 20px 0;
-        }
+    .btn-gold:hover {
+      background-color: var(--color-purple);
+      color: var(--color-white);
+    }
 
-        button, .btn-link {
-            padding: 14px 24px;
-            font-size: 1.05rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
+    /* PRODUCTS SECTION */
+    .products-section {
+      max-width: 1200px;
+      margin: 5rem auto;
+      padding: 0 1.5rem;
+    }
 
-        .pass-card {
-            border: 2px dashed #d63384;
-            background: #fff;
-            padding: 20px;
-            border-radius: 16px;
-            margin-top: 15px;
-        }
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
 
-        .badge {
-            background: #d63384;
-            color: white;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-    </style>
+    .section-title h3 {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      color: var(--color-forest);
+    }
+
+    .section-title p {
+      color: var(--color-purple);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .product-card {
+      background: var(--color-white);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      padding-bottom: 1.5rem;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      background-color: var(--color-dark);
+    }
+
+    .product-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--color-forest);
+      margin: 1rem 0 0.3rem 0;
+    }
+
+    .product-card .price {
+      color: var(--color-gold);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid var(--color-forest);
+      color: var(--color-forest);
+      padding: 0.5rem 1.2rem;
+      text-decoration: none;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--color-forest);
+      color: var(--color-white);
+    }
+
+    /* STORY SECTION */
+    .story-section {
+      background-color: var(--color-forest);
+      color: var(--color-silver);
+      padding: 5rem 2rem;
+      margin-top: 5rem;
+    }
+
+    .story-container {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .story-container h3 {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      color: var(--color-gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .story-container p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .badge-purple {
+      display: inline-block;
+      background-color: var(--color-purple);
+      color: var(--color-white);
+      padding: 0.3rem 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: var(--color-dark);
+      color: var(--color-silver);
+      text-align: center;
+      padding: 3rem 1.5rem 1.5rem 1.5rem;
+      border-top: 1px solid rgba(219, 179, 57, 0.2);
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h2 { font-size: 2.2rem; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- SCHERMATA 1: Domanda Trabocchetto -->
-    <div id="schermata1" class="container">
-        <h1>Programmi per stasera? 🤔</h1>
-        <p>Stasera si va a sushi, ma prima dimostra di essere una vera SUSHIGIRL!</p>
-        <div class="btn-group">
-            <button id="btn-si">Accetta la Sfida 🍣</button>
-            <button id="btn-no">Non ho voglia 😜</button>
-        </div>
+  <!-- NAVBAR -->
+  <header>
+    <nav>
+      <a href="#" class="brand-logo">
+        <h1>Montaldi Gioielli</h1>
+        <span>Signs of Abruzzo</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#collezioni">Collezioni</a></li>
+        <li><a href="#storia">Tradizione</a></li>
+        <li><a href="#chi-siamo">Azienda</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Simboli & Misticismo d'Abruzzo</h2>
+      <p>Creazioni uniche in oro e argento, plasmate dal fascino dell'antica tradizione orafina abruzzese.</p>
+      <a href="#collezioni" class="btn-gold">Scopri la Collezione</a>
+    </div>
+  </section>
+
+  <!-- PRODOTTI -->
+  <section id="collezioni" class="products-section">
+    <div class="section-title">
+      <span class="badge-purple">Apotropaico & Tradizione</span>
+      <h3>I Gioielli Iconici</h3>
     </div>
 
-    <!-- SCHERMATA 2: IL GIOCO EXPERT -->
-    <div id="schermata2" class="container hidden">
-        <span id="level-badge" class="level-badge">Livello 1 di 3</span>
-        <h1 id="game-title">Nigiri Sake Aburi 🍣🔥</h1>
-        <p id="game-desc">Seleziona solo gli ingredienti corretti per questa preparazione!</p>
+    <div class="product-grid">
+      <!-- Prodotto 1 -->
+      <div class="product-card">
+        <img src="width_800 (1).jpg" alt="Presentosa Abruzzese Gold" class="product-image">
+        <h4>La Presentosa</h4>
+        <div class="price">€ 280,00</div>
+        <a href="#" class="btn-outline">Dettagli</a>
+      </div>
 
-        <!-- GRIGLIA INGREDIENTI -->
-        <div id="ingredients-grid" class="ingredients-grid"></div>
+      <!-- Prodotto 2 -->
+      <div class="product-card">
+        <img src="WhatsApp Image 2026-08-23 at 8.16.29 PM.jpeg" alt="Sciacquajje Orecchini" class="product-image">
+        <h4>Sciacquajje Incastonate</h4>
+        <div class="price">€ 340,00</div>
+        <a href="#" class="btn-outline">Dettagli</a>
+      </div>
 
-        <!-- PIATTO TARGET -->
-        <div id="plate" class="drop-zone">
-            <span id="placeholder-text" class="plate-placeholder">Componi la ricetta da vera Chef... 🥢</span>
-        </div>
+      <!-- Prodotto 3 -->
+      <div class="product-card">
+        <img src="width_400.jpg" alt="Ciondolo Chimera Abruzzese" class="product-image">
+        <h4>Ciondolo Chimera</h4>
+        <div class="price">€ 210,00</div>
+        <a href="#" class="btn-outline">Dettagli</a>
+      </div>
 
-        <div id="feedback" class="feedback-msg"></div>
+      <!-- Prodotto 4 -->
+      <div class="product-card">
+        <img src="width_600 (1).jpeg" alt="L'Amorino" class="product-image">
+        <h4>Spilla L'Amorino</h4>
+        <div class="price">€ 195,00</div>
+        <a href="#" class="btn-outline">Dettagli</a>
+      </div>
     </div>
+  </section>
 
-    <!-- SCHERMATA 3: SELEZIONE ORARIO -->
-    <div id="schermata3" class="container hidden">
-        <span class="badge">SUSHIGIRL Professionista! 🏆</span>
-        <h1>Test Superato Habibty!</h1>
-        <p>Hai dimostrato di essere un'esperta inarrivabile. Ora scegli l'orario per stasera:</p>
-
-        <label for="select-ora" style="font-weight: bold; color: #d63384; display: block; margin-top: 15px;">
-            A che ora ci andiamo? 🕗
-        </label>
-        <select id="select-ora">
-            <option value="19:30">19:30</option>
-            <option value="20:00">20:00</option>
-            <option value="20:30" selected>20:30</option>
-            <option value="21:00">21:00</option>
-            <option value="21:30">21:30</option>
-        </select>
-
-        <button id="btn-conferma-ora" style="background-color: #d63384; color: white; width: 100%;">
-            Conferma Orario & Prenota! 🎉
-        </button>
+  <!-- STORY SECTION -->
+  <section id="storia" class="story-section">
+    <div class="story-container">
+      <h3>Magia, Potere e Valore</h3>
+      <p>Ogni gioiello racchiude un'anima millenaria: il calore del sole d'oro, la protezione dei simboli apotropaici e la maestosità della terra abruzzese. Un connubio perfetto tra eleganza e mistero.</p>
+      <a href="#" class="btn-gold">La Nostra Storia</a>
     </div>
+  </section>
 
-    <!-- SCHERMATA 4: BIGLIETTO FINALE WHATSAPP -->
-    <div id="schermata4" class="container hidden">
-        <span class="badge">Prenotazione Confermata</span>
-        <h1>Ci vediamo stasera Amore! 🎉❤️</h1>
-        
-        <div class="pass-card">
-            <p><strong>Evento:</strong> Abbuffata di Sushi 🍣</p>
-            <p><strong>Orario scelto:</strong> Stasera ore <span id="ora-confermata" style="color: #d63384; font-weight: bold;">20:30</span> 🕗</p>
-            <p><strong>Conto:</strong> Offro io! 💳😊</p>
-            <p><strong>Codice Sconto:</strong> TI-AMO-100!❤️ </p>
-        </div>
-
-        <div style="margin-top: 25px;">
-            <a id="whatsapp-link" href="#" class="btn-link" style="background-color: #25D366; color: white; width: 100%;">
-                Invia conferma su WhatsApp 📲
-            </a>
-        </div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="brand-logo">
+      <h1>Montaldi Gioielli</h1>
+      <span>Signs of Abruzzo</span>
     </div>
+    <p>&copy; 2026 Montaldi Gioielli. Tutti i diritti riservati.</p>
+  </footer>
 
-    <script>
-        // Bottone che scappa
-        const btnSi1 = document.getElementById('btn-si');
-        const btnNo1 = document.getElementById('btn-no');
-        const schermata1 = document.getElementById('schermata1');
-        const schermata2 = document.getElementById('schermata2');
-
-        let clickNoCount = 0;
-        const frasiNo = ["Non ho voglia 😜", "Sicura?? 🥺", "Guarda che c'è il sushi!! 🍣", "Daiiii ❤️", "Tasto rotto! 😂"];
-
-        function scappa(bottone) {
-            bottone.classList.add('scappa');
-            clickNoCount = (clickNoCount + 1) % frasiNo.length;
-            bottone.innerText = frasiNo[clickNoCount];
-
-            const currentSize = parseFloat(window.getComputedStyle(btnSi1).fontSize);
-            btnSi1.style.fontSize = (currentSize + 2) + 'px';
-
-            const x = Math.random() * (window.innerWidth - bottone.offsetWidth - 20);
-            const y = Math.random() * (window.innerHeight - bottone.offsetHeight - 20);
-            bottone.style.left = Math.max(10, x) + 'px';
-            bottone.style.top = Math.max(10, y) + 'px';
-        }
-
-        btnNo1.addEventListener('mouseover', () => scappa(btnNo1));
-        btnNo1.addEventListener('touchstart', (e) => { e.preventDefault(); scappa(btnNo1); });
-
-        btnSi1.addEventListener('click', () => {
-            schermata1.classList.add('hidden');
-            schermata2.classList.remove('hidden');
-            caricaLivello(0);
-        });
-
-        // DATI LIVELLI SUSHI EXPERT (SENZA SUB)
-        const livelli = [
-            {
-                titolo: "Nigiri Sake 🍣🔥",
-                desc: "Componi un <strong>Nigiri Sake</strong> a regola d'arte:",
-                richiesti: ["shari", "sake", "teriyaki"],
-                ingredienti: [
-                    { id: "shari", icon: "🍚", name: "Shari" },
-                    { id: "sake", icon: "🐟", name: "Sake" },
-                    { id: "teriyaki", icon: "🍯", name: "Teriyaki" },
-                    { id: "rice_plain", icon: "🍚", name: "Riso Bianco" },
-                    { id: "mayo", icon: "🧴", name: "Maionese" }
-                ],
-                errori: {
-                    rice_plain: "❌ Errore! Un vero chef usa lo Shari, non il riso in bianco!",
-                    mayo: "❌ Ehi! Niente maionese da supermercato sui Nigiri"
-                }
-            },
-            {
-                titolo: "Ebi Uramaki 🍤🥑",
-                desc: "Seleziona gli elementi per un <strong>Uramaki</strong> perfetto:",
-                richiesti: ["shari", "nori", "ebi_tempura", "tobiko"],
-                ingredienti: [
-                    { id: "shari", icon: "🍚", name: "Shari" },
-                    { id: "nori", icon: "🍙", name: "Alga Nori" },
-                    { id: "ebi_tempura", icon: "🍤", name: "Ebi Tempura" },
-                    { id: "tobiko", icon: "🟧", name: "Tobiko" },
-                    { id: "surimi", icon: "🦀", name: "Surimi" }
-                ],
-                errori: {
-                    surimi: "❌ Da te mi aspetto di meglio!"
-                }
-            }        ];
-
-        let livelloAttuale = 0;
-        let inseriti = [];
-
-        function caricaLivello(index) {
-            livelloAttuale = index;
-            inseriti = [];
-            
-            const dati = livelli[index];
-            document.getElementById('level-badge').innerText = `Livello ${index + 1} di 3`;
-            document.getElementById('game-title').innerText = dati.titolo;
-            document.getElementById('game-desc').innerHTML = dati.desc;
-            document.getElementById('feedback').innerText = "";
-
-            const plate = document.getElementById('plate');
-            plate.innerHTML = `<span id="placeholder-text" class="plate-placeholder">Componi la ricetta... 🥢</span>`;
-
-            const grid = document.getElementById('ingredients-grid');
-            grid.innerHTML = "";
-            dati.ingredienti.forEach(item => {
-                const el = document.createElement('div');
-                el.className = 'ingredient';
-                el.draggable = true;
-                el.dataset.type = item.id;
-                el.id = `ing-${item.id}`;
-                el.innerHTML = `
-                    <div class="icon">${item.icon}</div>
-                    <span class="name">${item.name}</span>
-                `;
-
-                el.addEventListener('dragstart', (e) => e.dataTransfer.setData('text/plain', item.id));
-                el.addEventListener('click', () => gestisciIngrediente(item.id));
-                
-                grid.appendChild(el);
-            });
-        }
-
-        const plate = document.getElementById('plate');
-        plate.addEventListener('dragover', (e) => { e.preventDefault(); plate.classList.add('drag-over'); });
-        plate.addEventListener('dragleave', () => plate.classList.remove('drag-over'));
-        plate.addEventListener('drop', (e) => {
-            e.preventDefault();
-            plate.classList.remove('drag-over');
-            const type = e.dataTransfer.getData('text/plain');
-            gestisciIngrediente(type);
-        });
-
-        function gestisciIngrediente(type) {
-            const dati = livelli[livelloAttuale];
-            const feedback = document.getElementById('feedback');
-
-            if (!dati.richiesti.includes(type)) {
-                feedback.innerText = dati.errori[type] || "❌ Errore! Ingredienti non idonei per un sushi di alto livello!";
-                return;
-            }
-
-            if (inseriti.includes(type)) return;
-
-            feedback.innerText = "";
-            const placeholder = document.getElementById('placeholder-text');
-            if (placeholder) placeholder.style.display = 'none';
-
-            inseriti.push(type);
-            const ingData = dati.ingredienti.find(i => i.id === type);
-            
-            const itemSpan = document.createElement('span');
-            itemSpan.style.fontSize = '1.8rem';
-            itemSpan.title = ingData.name;
-            itemSpan.innerText = ingData.icon;
-            plate.appendChild(itemSpan);
-
-            const el = document.getElementById(`ing-${type}`);
-            if (el) {
-                el.style.opacity = '0.3';
-                el.style.pointerEvents = 'none';
-            }
-
-            if (inseriti.length === dati.richiesti.length) {
-                setTimeout(() => {
-                    if (livelloAttuale + 1 < livelli.length) {
-                        caricaLivello(livelloAttuale + 1);
-                    } else {
-                        document.getElementById('schermata2').classList.add('hidden');
-                        document.getElementById('schermata3').classList.remove('hidden');
-                    }
-                }, 600);
-            }
-        }
-
-        // SCHERMATA FINALE & WHATSAPP
-        document.getElementById('btn-conferma-ora').addEventListener('click', () => {
-            const oraSelezionata = document.getElementById('select-ora').value;
-            document.getElementById('ora-confermata').innerText = oraSelezionata;
-
-            document.getElementById('schermata3').classList.add('hidden');
-            document.getElementById('schermata4').classList.remove('hidden');
-
-            confetti({ particleCount: 130, spread: 80, origin: { y: 0.6 } });
-
-            // SOSTITUISCI CON IL TUO NUMERO VERO (es. 393331234567)
-            const tuoNumero = "3914755362"; 
-            const messaggio = encodeURIComponent(`Ho superato il test da vera SUSHIGIRL! 🍣🏆 Ci vediamo stasera HABIBI alle ore ${oraSelezionata}! ❤️`);
-            document.getElementById('whatsapp-link').href = `https://wa.me/${tuoNumero}?text=${messaggio}`;
-        });
-    </script>
 </body>
 </html>
